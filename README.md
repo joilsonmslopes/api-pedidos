@@ -32,7 +32,7 @@ Geralmente eu inicio o projeto utilizando o [NPM](https://www.npmjs.com/),
 mas instalo as depedências utilizando o **YARN**.
 
 ```bash
-npm init -d
+npm init -y
 yarn add express
 yarn add body-parser
 yarn add nodemon -D
