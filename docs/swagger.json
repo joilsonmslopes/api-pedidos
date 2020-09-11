@@ -1,0 +1,487 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "MINHA API",
+    "version": "1.0.0",
+    "title": "Swagger API ANDRE",
+    "contact": {
+      "email": "joilsonmirandasl@hotmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "DOCUMENTACAO DA API"
+    },
+    {
+      "name": "pedidos",
+      "description": "Operações dos pedidos"
+    },
+    {
+      "name": "status",
+      "description": "Operações dos status"
+    },
+    {
+      "name": "pratos",
+      "description": "Operações dos pratos"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/status": {
+      "get": {
+        "tags": [
+          "status"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna uma lista de objetos",
+            "schema": {
+              "$ref": "#/definitions/StatusListResponse"
+            }
+          },
+          "400": {
+            "description": "ERRO",
+            "schema": {
+              "$ref": "#/definitions/StatusGetResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "status"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StatusPostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Status Cadastrado",
+            "schema": {
+              "$ref": "#/definitions/StatusSuccess"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          },
+          "422": {
+            "description": "Dados inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          }
+        }
+      }
+    },
+    "/status/{id}": {
+      "get": {
+        "tags": [
+          "status"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "id",
+            "description": "Id do status",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um objeto",
+            "schema": {
+              "$ref": "#/definitions/StatusGetResponse"
+            }
+          },
+          "400": {
+            "description": "ERRO"
+          },
+          "404": {
+            "description": "Id não encontrado"
+          }
+        }
+      }
+    },
+    "/pedidos": {
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna uma lista de pedidos",
+            "schema": {
+              "$ref": "#/definitions/PedidosGetResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pedidos"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Retorno da chamada",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PedidosPostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Pedido realizado",
+            "schema": {
+              "$ref": "#/definitions/StatusSuccess"
+            }
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          },
+          "422": {
+            "description": "Dados Inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          }
+        }
+      }
+    },
+    "/pedidos/{id}": {
+      "get": {
+        "tags": [
+          "pedidos"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "type": "integer",
+            "name": "id",
+            "description": "Id do Pedido",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "pedidos"
+        ],
+        "summary": "Editar pedido",
+        "description": "",
+        "operationId": "updatePedido",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Alterar Pedido",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PedidosPutResponse"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Pet not found"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
+    "/pratos": {
+      "get": {
+        "tags": [
+          "pratos"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna uma lista de pratos",
+            "schema": {
+              "$ref": "#/definitions/PratosGetResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "pratos"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PratosPostRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Prato Criado",
+            "schema": {
+              "$ref": "#/definitions/PratoSuccess"
+            }
+          },
+          "400": {
+            "description": "Dados Inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          },
+          "422": {
+            "description": "Dados Inválidos",
+            "schema": {
+              "$ref": "#/definitions/StatusError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StatusGetResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nome": {
+          "type": "string"
+        }
+      }
+    },
+    "StatusListResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/StatusGetResponse"
+      }
+    },
+    "StatusError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        }
+      }
+    },
+    "StatusSuccess": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "StatusPostRequest": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        }
+      }
+    },
+    "PratosGetResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nome": {
+          "type": "string"
+        },
+        "serve_pessoas": {
+          "type": "integer"
+        },
+        "valor": {
+          "type": "number"
+        }
+      }
+    },
+    "PratosPostRequest": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        },
+        "quantidade": {
+          "type": "integer"
+        },
+        "serve_pessoas": {
+          "type": "integer"
+        },
+        "valor": {
+          "type": "number"
+        }
+      }
+    },
+    "PratoSuccess": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "PedidosGetResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cliente": {
+          "type": "string"
+        }
+      }
+    },
+    "PedidosPostRequest": {
+      "type": "object",
+      "properties": {
+        "cliente": {
+          "type": "string"
+        },
+        "quantidade": {
+          "type": "integer"
+        },
+        "prato_id": {
+          "type": "integer"
+        },
+        "status_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "PedidosPutResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "cliente": {
+          "type": "string"
+        },
+        "quantidade": {
+          "type": "integer"
+        },
+        "prato_id": {
+          "type": "integer"
+        },
+        "status_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatusRequest": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string"
+        }
+      }
+    },
+    "StatusReponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "nome": {
+          "type": "string"
+        }
+      }
+    },
+    "Status": {
+      "type": "object",
+      "required": [
+        "name",
+        "photoUrls"
+      ],
+      "properties": {
+        "nome": {
+          "type": "string",
+          "description": "Descrição do Status"
+        }
+      },
+      "xml": {
+        "name": "Pet"
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+swagger: "2.0"
+info:
+  description: "MINHA API"
+  version: "1.0.0"
+  title: "Swagger API ANDRE"
+  contact:
+    email: "EMAI_JOI@JOI.COM"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:3000"
+basePath: "/"
+tags:
+- name: "DOCUMENTACAO DA API"
+  
+- name: "pedido"
+  description: "Operações dos pedidos"
+- name: "status"
+  description: "Operações dos status"
+- name: "pratos"
+  description: "Operações dos pratos"
+  
+schemes:
+- "http"
+
+paths:
+  /status:
+    get:
+      tags:
+        - status
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Retorna uma lista de objetos"
+          schema: 
+            $ref: "#/definitions/StatusListResponse"
+        "400":
+          description: "ERRO"
+
+    post:
+      tags:
+        - status
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            #type: object
+            #properties:
+            #  item:
+            #    type: integer
+            #  nome:
+            #    type: string
+            $ref: "#/definitions/StatusPostRequest"
+        
+      responses:
+        "200":
+          description: "OK"
+
+        "400":
+          description: "ERRO"
+
+  /status/{id}:
+    get:
+      tags:
+        - status
+      produces:
+        - "application/json"
+      parameters:
+        - in: "path"
+          type: "integer"
+          name: "id"
+          description: "Id do status"
+          required: true
+      responses:
+        "200":
+          description: "Retorna um objeto"
+          schema: 
+            $ref: "#/definitions/StatusGetResponse"
+        "400":
+          description: "ERRO"
+
+    
+
+
+  /pedido:
+    post:
+      tags:
+      - "pedido"
+      summary: "Adicionar um novo Pedido"
+      description: "Criar um novo Pedido"
+      operationId: "addPedido"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Retorno da chamada"
+        required: true
+        schema:
+          $ref: "#/definitions/StatusRequest"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            $ref: "#/definitions/StatusReponse"
+        "405":
+          description: "Invalid input"
+
+    put:
+      tags:
+      - "pedido"
+      summary: "Editar pedido"
+      description: ""
+      operationId: "updatePedido"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: true
+        schema:
+          $ref: "#/definitions/Status"
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
+        "405":
+          description: "Validation exception"
+    
+definitions:
+
+  StatusGetResponse:
+    type: object
+    properties: 
+      id:
+        type: integer
+      nome:
+        type: string
+
+  StatusListResponse:
+    type: array
+    items:
+      $ref: "#/definitions/StatusGetResponse"
+
+
+
+
+  StatusPostRequest:
+    type: object
+    properties: 
+      nome:
+        type: string
+
+
+
+  StatusRequest:
+    type: "object"
+    properties: 
+      nome: 
+        type: "string"
+
+  StatusReponse:
+    type: "object"
+    properties: 
+      id: 
+        type: "integer"
+      nome: 
+        type: "string"
+
+  Status:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      nome:
+        type: "string"
+        description: "Descrição do Status"
+        
+    xml:
+      name: "Pet"
